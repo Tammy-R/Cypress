@@ -5,10 +5,10 @@ let password = faker.internet.password();
 
 describe('Login module', () => {
     it('GA-19 : Login page layout ', () => {
-        cy.visit('/') 
+        cy.visit('/login') 
         cy.get(".nav-link").contains("Login").should('be.visible')
-        cy.get('form > nth:child(1)').should('be.visible')
-        cy.get('[type=password]').should('be.visible')
+        cy.get('#email').should('be.visible')
+        cy.get('#password').should('be.visible')
         cy.get("[type=submit]").contains("Submit").should('be.visible')
     })
   })
