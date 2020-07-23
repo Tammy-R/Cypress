@@ -24,7 +24,6 @@ describe('Login module', () => {
     })
 
 
-
     it('GA-22 : Login - invalid data - username ', () => {
 cy.visit('/') 
 cy.get(".nav-link").contains("Login").click()
