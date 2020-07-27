@@ -1,3 +1,7 @@
+import {EMAIL} from '../fixtures/constants';
+import { authPage } from '../page_object/login.page';
+import { randomEmail } from '../utils';
+
 const faker= require('faker');
 
 let email= faker.internet.email();
@@ -8,57 +12,115 @@ let lastName = faker.name.lastName();
 
 
 describe('Login module', () => {
+
+  before (() => {
+    cy.visit('/')
+    
+  })
+
     it('GA-19 : Login page layout ', () => {
         cy.visit('/login') 
         cy.get(".nav-link").contains("Login").should('be.visible')
-        cy.get('#email').should('be.visible')
-        cy.get('#password').should('be.visible')
-        cy.get("[type=submit]").contains("Submit").should('be.visible')
+        authPage.email.should('be.visible')
+        authPage.password.should('be.visible')
+        authPage.loginButton.click()
     })
 
     it('GA-28 : Login - valid data', () => {
-        cy.visit('/') 
+        //cy.visit('/') 
         cy.get(".nav-link").contains("Login").click()
-        cy.get('#email').type('ruzictam@gmail.com')
-        cy.get('#password').type('0637379360')
-        cy.get("[type=submit]").contains("Submit").click()
-        cy.wait(1000)
+        authPage.login(EMAIL.EXISTING, EMAIL.PASSWORD)
+        cy.server()
+        cy.route(Cypress.env('apiUrl') + '/galleries?page=1&term=').as('galleries')
+        cy.wait('@galleries')
+        // authPage.email.type('ruzictam@gmail.com')
+        // authPage.password.type('0637379360')
+        // cy.get("[type=submit]").contains("Submit").click()
+        //cy.wait(1000)
         cy.get(".nav-link").contains("Logout").should('be.visible')
         })
     
     
         it('GA-22 : Login - invalid data - username ', () => {
-    cy.visit('/') 
+    //cy.visit('/') 
     cy.get(".nav-link").contains("Login").click()
-    cy.get('#email').type(email)
-    cy.get('#password').type('0637379360')
+    authPage.email.type('test')
+    authPage.password.type('0637379360')
     cy.get("[type=submit]").contains("Submit").click()
-    cy.get(".alert").contains("Bad Credentials").should('be.visible')
+    authPage.email.then(($input) => {
+      expect($input[0].validationMessage).to.eq('Please include an \'@\' in the email address. \'test\' is missing an \'@\'.')
+  })
+    //cy.get(".alert").contains("Bad Credentials").should('be.visible')
     })
+
+    it('Login - invalid data - incomplete email ', () => {
+      //cy.visit('/') 
+      cy.get(".nav-link").contains("Login").click()
+      authPage.email.type('ruzictam@')
+      authPage.password.type('0637379360')
+      cy.get("[type=submit]").contains("Submit").click()
+      authPage.email.then(($input) => {
+        expect($input[0].validationMessage).to.eq('Please enter a part following \'@\'. \'ruzictam@\' is incomplete.')
+    })
+      
+      })
+
+    it('Login - invalid data - empty username ', () => {
+      //cy.visit('/') 
+      cy.get(".nav-link").contains("Login").click()
+      authPage.email
+      authPage.password.type('0637379360')
+      cy.get("[type=submit]").contains("Submit").click()
+      authPage.email.then(($input) => {
+        expect($input[0].validationMessage).to.eq('Please fill out this field.')
+    })
+      //cy.get(".alert").contains("Bad Credentials").should('be.visible')
+     })
     
     
       
         it('GA-23 : Login - invalid data - password ', () => {
-    cy.visit('/') 
+    //cy.visit('/') 
     cy.get(".nav-link").contains("Login").click()
-    cy.get('#email').type('ruzictam@gmail.com')
-    cy.get('#password').type(password)
+    authPage.email.type(EMAIL.EXISTING)
+    authPage.password.type(password)
     cy.get("[type=submit]").contains("Submit").click()
     cy.get(".alert").should('be.visible')
                     .should('have.text', 'Bad Credentials')
                     .should('have.class', 'alert')
     })
-  })
 
+    it('GA-23 : Login - invalid data - empty password ', () => {
+      cy.visit('/') 
+      cy.get(".nav-link").contains("Login").click()
+      authPage.email.type(EMAIL.EXISTING)
+      authPage.password
+      cy.get("[type=submit]").contains("Submit").click()
+      cy.get('#password').then(($input) => {
+        expect($input[0].validationMessage).to.eq('Please fill out this field.')
+    })
+      })
+   
+    })
+     
   
 
 describe('Register module', () => {
+
+  beforeEach (() => {
+    cy.visit('/register')
+  })
+  before(() => {
+    cy.server()
+        cy.route('https://gallery-api.vivifyideas.com/api/galleries?page=1&term=').as('galleries')
+  })
+
     it('GA-9 : Register page test ', () =>{
         cy.visit('/register')
         cy.get('#first-name').should('be.visible')
         cy.get('#last-name').should('be.visible')
-        cy.get('#email').should('be.visible')
-        cy.get('#password').should('be.visible')
+        authPage.email.should('be.visible')
+        authPage.password.should('be.visible')
         cy.get('#password-confirmation').should('be.visible')
         cy.get('.form-check-label').contains('Accepted terms and conditions').should('be.visible')
         cy.get('[type=submit]').contains('Submit').should('be.visible')
@@ -69,21 +131,21 @@ describe('Register module', () => {
         cy.visit('/register')
         cy.get('#first-name').type(firstName)
         cy.get('#last-name').type(lastName)
-        cy.get('#email').type(email)
-        cy.get('#password').type(password)
+        authPage.email.type(email)
+        authPage.password.type(password)
         cy.get('#password-confirmation').type(password)
         cy.get('.form-check-input').click()
         cy.get('[type=submit]').contains('Submit').click()
-        cy.wait(1000)
+        cy.wait('@galleries')
         cy.get(".nav-link").contains("Logout").should('be.visible')
     })
 
-    it('GA-40 : Register page test - First name input field: required  ', () => {
+    it.only('GA-40 : Register page test - First name input field: required  ', () => {
         cy.visit('/register')
         cy.get('#first-name')
         cy.get('#last-name').type(lastName)
-        cy.get('#email').type(emailTwo)
-        cy.get('#password').type(password)
+        authPage.email.type(randomEmail())
+        authPage.password.type(password)
         cy.get('#password-confirmation').type(password)
         cy.get('.form-check-input').click()
         cy.get('[type=submit]').contains('Submit').click()
@@ -95,8 +157,8 @@ describe('Register module', () => {
         cy.visit('/register')
         cy.get('#first-name').type(firstName)
         cy.get('#last-name')
-        cy.get('#email').type(emailTwo)
-        cy.get('#password').type(password)
+        authPage.email.type(emailTwo)
+        authPage.password.type(password)
         cy.get('#password-confirmation').type(password)
         cy.get('.form-check-input').click()
         cy.get('[type=submit]').contains('Submit').click()
@@ -108,8 +170,8 @@ describe('Register module', () => {
         cy.visit('/register')
         cy.get('#first-name').type(firstName)
         cy.get('#last-name').type(lastName)
-        cy.get('#email')
-        cy.get('#password').type(password)
+        authPage.email
+        authPage.password.type(password)
         cy.get('#password-confirmation').type(password)
         cy.get('.form-check-input').click()
         cy.get('[type=submit]').contains('Submit').click()
@@ -121,8 +183,8 @@ describe('Register module', () => {
         cy.visit('/register')
         cy.get('#first-name').type(firstName)
         cy.get('#last-name').type(lastName)
-        cy.get('#email').type('invalid@email')
-        cy.get('#password').type(password)
+        authPage.email.type('invalid@email')
+        authPage.password.type(password)
         cy.get('#password-confirmation').type(password)
         cy.get('.form-check-input').click()
         cy.get('[type=submit]').contains('Submit').click()
@@ -135,8 +197,8 @@ describe('Register module', () => {
         cy.visit('/register')
         cy.get('#first-name').type(firstName)
         cy.get('#last-name').type(lastName)
-        cy.get('#email').type(emailTwo)
-        cy.get('#password')
+        authPage.email.type(emailTwo)
+        authPage.password
         cy.get('#password-confirmation').type(password)
         cy.get('.form-check-input').click()
         cy.get('[type=submit]').contains('Submit').click()
@@ -148,8 +210,8 @@ describe('Register module', () => {
     cy.visit('/register')
     cy.get('#first-name').type(firstName)
     cy.get('#last-name').type(lastName)
-    cy.get('#email').type(emailTwo)
-    cy.get('#password').type(password)
+    authPage.email.type(emailTwo)
+    authPage.password.type(password)
     cy.get('#password-confirmation')
     cy.get('.form-check-input').click()
     cy.get('[type=submit]').contains('Submit').click()
@@ -161,8 +223,8 @@ describe('Register module', () => {
     cy.visit('/register')
     cy.get('#first-name').type(firstName)
     cy.get('#last-name').type(lastName)
-    cy.get('#email').type(emailTwo)
-    cy.get('#password').type(password)
+    authPage.email.type(emailTwo)
+    authPage.password.type(password)
     cy.get('#password-confirmation').type('testtest3')
     cy.get('.form-check-input').click()
     cy.get('[type=submit]').contains('Submit').click()
@@ -176,8 +238,8 @@ describe('Register module', () => {
     cy.visit('/register')
     cy.get('#first-name').type(firstName)
     cy.get('#last-name').type(lastName)
-    cy.get('#email').type(emailTwo)
-    cy.get('#password').type('password')
+    authPage.email.type(emailTwo)
+    authPage.password.type('password')
     cy.get('#password-confirmation').type('password')
     cy.get('.form-check-input').click()
     cy.get('[type=submit]').contains('Submit').click()
@@ -191,8 +253,8 @@ describe('Register module', () => {
     cy.visit('/register')
     cy.get('#first-name').type(firstName)
     cy.get('#last-name').type(lastName)
-    cy.get('#email').type(emailTwo)
-    cy.get('#password').type('pass2')
+    authPage.email.type(emailTwo)
+    authPage.password.type('pass2')
     cy.get('#password-confirmation').type('pass2')
     cy.get('.form-check-input').click()
     cy.get('[type=submit]').contains('Submit').click()
@@ -206,8 +268,8 @@ describe('Register module', () => {
         cy.visit('/register')
         cy.get('#first-name').type(firstName)
         cy.get('#last-name').type(lastName)
-        cy.get('#email').type(email)
-        cy.get('#password').type(password)
+        authPage.email.type(email)
+        authPage.password.type(password)
         cy.get('#password-confirmation').type(password)
         cy.get('.form-check-input').click()
         cy.get('[type=submit]').contains('Submit').click()
