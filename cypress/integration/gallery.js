@@ -39,7 +39,7 @@ describe('GA-21 : Title field ', () => {
 
  })
 
-    it('Brisanje galerija', ()=>{
+    it.only('Brisanje galerija', ()=>{
         cy.visit('/my-galleries')
         galleryPage.gallery.click()
 
