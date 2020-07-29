@@ -77,7 +77,7 @@ describe('Register module', () => {
 
   it('GGA-55 : Register page test - Email field format invalid ', () => {
     authPage.register(firstName, lastName, 'invalid@email', password, password)
-    cy.get('.alert').contains('The email must be a valid email address').should('be.visible')
+    authPage.alert.contains('The email must be a valid email address').should('be.visible')
     cy.get(".nav-link").contains("Register").should('be.visible')
   })
 
@@ -102,28 +102,28 @@ describe('Register module', () => {
 
   it('GA-81 : Confirmation password doesnt match', () => {
     authPage.register(firstName, lastName, emailTwo, password, 'something')
-    cy.get('.alert').contains('The password confirmation does not match').should('be.visible')
+    authPage.alert.contains('The password confirmation does not match').should('be.visible')
       .should('contains.text', 'The password confirmation does not match.')
     cy.get(".nav-link").contains("Register").should('be.visible')
   })
 
   it('GA-82 : Password form - invalid', () => {
     authPage.register(firstName, lastName, emailTwo, 'password', 'password')
-    cy.get('.alert').contains('The password format is invalid.').should('be.visible')
+    authPage.alert.contains('The password format is invalid.').should('be.visible')
       .should('contains.text', 'The password format is invalid.')
     cy.get(".nav-link").contains("Register").should('be.visible')
   })
 
   it('GA-83 : Password form - password has less then 8 characters  ', () => {
     authPage.register(firstName, lastName, emailTwo, 'pass2', 'pass2')
-    cy.get('.alert').contains('The password must be at least 8 characters').should('be.visible')
+    authPage.alert.contains('The password must be at least 8 characters').should('be.visible')
       .should('contains.text', 'The password must be at least 8 characters.')
     cy.get(".nav-link").contains("Register").should('be.visible')
   })
 
   it('GA-84 : User can not be registered twice', () => {
     authPage.register(firstName, lastName, EMAIL.EXISTING, EMAIL.PASSWORD, EMAIL.PASSWORD)
-    cy.get('.alert').contains('The email has already been taken.').should('be.visible')
+    authPage.alert.contains('The email has already been taken.').should('be.visible')
       .should('contains.text', 'The email has already been taken.')
     cy.get(".nav-link").contains("Register").should('be.visible')
 

@@ -27,6 +27,9 @@ export default class AuthPage {
         return cy.get('.form-check-input')
     }
 
+    get alert() {
+        return cy.get('.alert')
+    }
 
     login(mejl, sifra) {
         if (mejl) {
