@@ -19,11 +19,10 @@ describe('Login module', () => {
   })
 
   it('GA-19 : Login page layout ', () => {
-    cy.visit('/login')
     cy.get(".nav-link").contains("Login").should('be.visible')
     authPage.email.should('be.visible')
     authPage.password.should('be.visible')
-    authPage.loginButton.click()
+    authPage.loginButton.should('be.visible')
   })
 
   it('GA-28 : Login - valid data', () => {
@@ -32,10 +31,6 @@ describe('Login module', () => {
     cy.server()
     cy.route(Cypress.env('apiUrl') + '/galleries?page=1&term=').as('galleries')
     cy.wait('@galleries')
-    // authPage.email.type('ruzictam@gmail.com')
-    // authPage.password.type('0637379360')
-    // cy.get("[type=submit]").contains("Submit").click()
-    //cy.wait(1000)
     cy.get(".nav-link").contains("Logout").should('be.visible')
   })
 
@@ -46,7 +41,7 @@ describe('Login module', () => {
     authPage.email.then(($input) => {
       expect($input[0].validationMessage).to.eq('Please include an \'@\' in the email address. \'test\' is missing an \'@\'.')
     })
-  
+
   })
 
   it('Login - invalid data - incomplete email ', () => {
@@ -58,11 +53,9 @@ describe('Login module', () => {
 
   })
 
-  it('Login - invalid data - empty username ', () => {
+  it.only('Login - invalid data - empty username ', () => {
     cy.get(".nav-link").contains("Login").click()
-    authPage.email
-    authPage.password.type('0637379360')
-    cy.get("[type=submit]").contains("Submit").click()
+    authPage.login('', EMAIL.PASSWORD);
     authPage.email.then(($input) => {
       expect($input[0].validationMessage).to.eq('Please fill out this field.')
     })
@@ -70,7 +63,7 @@ describe('Login module', () => {
 
 
 
-  it.only('GA-23 : Login - invalid data - password ', () => {
+  it('GA-23 : Login - invalid data - password ', () => {
     cy.get(".nav-link").contains("Login").click()
     authPage.login(EMAIL.EXISTING, password)
     cy.get(".alert").should('be.visible')
@@ -78,12 +71,9 @@ describe('Login module', () => {
       .should('have.class', 'alert')
   })
 
-  it('GA-23 : Login - invalid data - empty password ', () => {
-    cy.visit('/')
+  it.only('GA-23 : Login - invalid data - empty password ', () => {
     cy.get(".nav-link").contains("Login").click()
-    authPage.email.type(EMAIL.EXISTING)
-    authPage.password
-    cy.get("[type=submit]").contains("Submit").click()
+    authPage.login(EMAIL.EXISTING, '')
     cy.get('#password').then(($input) => {
       expect($input[0].validationMessage).to.eq('Please fill out this field.')
     })
