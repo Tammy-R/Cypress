@@ -10,7 +10,6 @@ let emailTwo = faker.internet.email();
 let firstName = faker.name.firstName();
 let lastName = faker.name.lastName();
 
-
 describe('Login module', () => {
 
   beforeEach(() => {
@@ -53,7 +52,7 @@ describe('Login module', () => {
 
   })
 
-  it.only('Login - invalid data - empty username ', () => {
+  it('Login - invalid data - empty username ', () => {
     cy.get(".nav-link").contains("Login").click()
     authPage.login('', EMAIL.PASSWORD);
     authPage.email.then(($input) => {
@@ -71,7 +70,7 @@ describe('Login module', () => {
       .should('have.class', 'alert')
   })
 
-  it.only('GA-23 : Login - invalid data - empty password ', () => {
+  it('GA-23 : Login - invalid data - empty password ', () => {
     cy.get(".nav-link").contains("Login").click()
     authPage.login(EMAIL.EXISTING, '')
     cy.get('#password').then(($input) => {
