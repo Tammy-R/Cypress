@@ -8,7 +8,7 @@ export default class AuthPage {
     }
 
     get loginButton() {
-        return cy.get('button[type="submit"]')
+        return cy.get('button[type="submit"]').contains('Submit')
     }
 
     get firstName() {
