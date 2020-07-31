@@ -13,6 +13,10 @@ export default class GalleryPage {
         return cy.get('button[type="submit"]').contains('Submit')
     }
 
+    get cancelButton() {
+        return cy.get('button[type="submit"]').contains('Cancel')
+    }
+
     get title() {
         return cy.get('#title')
     }
@@ -31,6 +35,13 @@ export default class GalleryPage {
 
     get trashButton() {
         return cy.get('.fa-trash').eq(1)
+    }
+
+    get moveUp() {
+        return cy.get('.input-buttons').eq(0)
+    }
+    get moveDown() {
+        return cy.get('.input-buttons').eq(1)
     }
 
     get alert() {

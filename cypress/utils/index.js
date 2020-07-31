@@ -7,3 +7,5 @@ export const randomEmail = () => {
         .substr(2, 7) + '@vivifyacademy.com'
     );
 }
+
+
