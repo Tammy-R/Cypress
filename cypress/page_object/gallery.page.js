@@ -26,7 +26,11 @@ export default class GalleryPage {
     }
 
     get image() {
-        return cy.get('[type=url]')
+        return cy.get('[type=url]').eq(0)
+    }
+
+    get secondImg () {
+        return cy.get('[type=url]').eq(1)
     }
 
     get addImageButton() {
@@ -38,10 +42,10 @@ export default class GalleryPage {
     }
 
     get moveUp() {
-        return cy.get('.input-buttons').eq(0)
+        return cy.get('.input-buttons').eq(2)
     }
     get moveDown() {
-        return cy.get('.input-buttons').eq(1)
+        return cy.get('.input-buttons').eq(5)
     }
 
     get alert() {
