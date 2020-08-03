@@ -1,0 +1,268 @@
+//payload koji ubacujemo unutar rute da se ceka ucitana stranica svih galerija,
+// kopirali smo sa networka kad inspektujemo, kao za postman
+
+{
+    "galleries":[
+       {
+          "id":1017,
+          "title":"Galerija jk 2",
+          "description":"galerija 2",
+          "user_id":4,
+          "created_at":"2020-08-03 16:52:40",
+          "updated_at":"2020-08-03 16:52:40",
+          "user":{
+             "id":4,
+             "first_name":"Jelena",
+             "last_name":"Krstic",
+             "email":"jelllenakrstic@gmail.com",
+             "terms_and_conditions":1,
+             "created_at":"2020-07-30 10:34:30",
+             "updated_at":"2020-07-30 10:34:30"
+          },
+          "images":[
+             {
+                "id":1170,
+                "image_url":"https:\/\/i.pinimg.com\/originals\/d3\/c6\/a2\/d3c6a21483106c5858465ebfd5d8f610.jpg",
+                "gallery_id":1017,
+                "created_at":"2020-08-03 16:52:40",
+                "updated_at":"2020-08-03 16:52:40"
+             }
+          ]
+       },
+       {
+          "id":1016,
+          "title":"Galerija jk 1",
+          "description":"galerija 1",
+          "user_id":4,
+          "created_at":"2020-08-03 16:50:28",
+          "updated_at":"2020-08-03 16:50:28",
+          "user":{
+             "id":4,
+             "first_name":"Jelena",
+             "last_name":"Krstic",
+             "email":"jelllenakrstic@gmail.com",
+             "terms_and_conditions":1,
+             "created_at":"2020-07-30 10:34:30",
+             "updated_at":"2020-07-30 10:34:30"
+          },
+          "images":[
+             {
+                "id":1169,
+                "image_url":"https:\/\/cdn3.vectorstock.com\/i\/1000x1000\/94\/27\/sun-seamless-pattern-summer-hot-weather-sunshine-vector-23829427.jpg",
+                "gallery_id":1016,
+                "created_at":"2020-08-03 16:50:28",
+                "updated_at":"2020-08-03 16:50:28"
+             }
+          ]
+       },
+       {
+          "id":1015,
+          "title":"sunset",
+          "description":"sunrise and sunset dillema",
+          "user_id":3,
+          "created_at":"2020-08-03 16:45:40",
+          "updated_at":"2020-08-03 16:45:40",
+          "user":{
+             "id":3,
+             "first_name":"Brenda Strosin",
+             "last_name":"Bayer",
+             "email":"Clarabelle55@yahoo.com",
+             "terms_and_conditions":1,
+             "created_at":"2020-07-30 10:32:37",
+             "updated_at":"2020-07-30 10:32:37"
+          },
+          "images":[
+             {
+                "id":1168,
+                "image_url":"https:\/\/media-cdn.tripadvisor.com\/media\/photo-p\/10\/03\/28\/52\/pogled-iz-baste-na-zalazak.jpg",
+                "gallery_id":1015,
+                "created_at":"2020-08-03 16:45:40",
+                "updated_at":"2020-08-03 16:45:40"
+             }
+          ]
+       },
+       {
+          "id":1014,
+          "title":"First Gallery",
+          "description":"dsdfsafds",
+          "user_id":5,
+          "created_at":"2020-08-03 16:44:14",
+          "updated_at":"2020-08-03 16:44:14",
+          "user":{
+             "id":5,
+             "first_name":"Jovica",
+             "last_name":"Raicki",
+             "email":"jovica.raicki@gmail.com",
+             "terms_and_conditions":1,
+             "created_at":"2020-07-30 12:19:56",
+             "updated_at":"2020-07-30 12:19:56"
+          },
+          "images":[
+             {
+                "id":1167,
+                "image_url":"https:\/\/scx2.b-cdn.net\/gfx\/news\/hires\/2019\/2-nature.jpg",
+                "gallery_id":1014,
+                "created_at":"2020-08-03 16:44:14",
+                "updated_at":"2020-08-03 16:44:14"
+             }
+          ]
+       },
+       {
+          "id":1013,
+          "title":"ognjen galerija",
+          "description":"opis da to nije to",
+          "user_id":36,
+          "created_at":"2020-08-03 16:44:13",
+          "updated_at":"2020-08-03 16:44:13",
+          "user":{
+             "id":36,
+             "first_name":"ogi",
+             "last_name":"pet",
+             "email":"zoomght@gmail.com",
+             "terms_and_conditions":1,
+             "created_at":"2020-08-03 16:15:19",
+             "updated_at":"2020-08-03 16:15:19"
+          },
+          "images":[
+             {
+                "id":1166,
+                "image_url":"https:\/\/bg-gallery-api.vivifyideas.com\/media\/editorial_picture\/read.jpeg",
+                "gallery_id":1013,
+                "created_at":"2020-08-03 16:44:13",
+                "updated_at":"2020-08-03 16:44:13"
+             }
+          ]
+       },
+       {
+          "id":1011,
+          "title":"Test 2",
+          "description":"test Descriptions",
+          "user_id":29,
+          "created_at":"2020-08-03 16:24:08",
+          "updated_at":"2020-08-03 16:24:08",
+          "user":{
+             "id":29,
+             "first_name":"Ivan",
+             "last_name":"Vukosavljevic",
+             "email":"ivanfly1986@gmail.com",
+             "terms_and_conditions":1,
+             "created_at":"2020-08-02 10:41:04",
+             "updated_at":"2020-08-02 10:41:04"
+          },
+          "images":[
+             {
+                "id":1164,
+                "image_url":"https:\/\/thewallpaper.co\/\/wp-content\/uploads\/2019\/09\/\/reptiles-lizard-cute-pc-tropical-pet-images-animals-samsung-green-color-jpg.jpg",
+                "gallery_id":1011,
+                "created_at":"2020-08-03 16:24:08",
+                "updated_at":"2020-08-03 16:24:08"
+             }
+          ]
+       },
+       {
+          "id":1009,
+          "title":"dasdasdad",
+          "description":"dasdasdasd",
+          "user_id":36,
+          "created_at":"2020-08-03 16:15:46",
+          "updated_at":"2020-08-03 16:15:46",
+          "user":{
+             "id":36,
+             "first_name":"ogi",
+             "last_name":"pet",
+             "email":"zoomght@gmail.com",
+             "terms_and_conditions":1,
+             "created_at":"2020-08-03 16:15:19",
+             "updated_at":"2020-08-03 16:15:19"
+          },
+          "images":[
+             {
+                "id":1162,
+                "image_url":"https:\/\/bg-gallery-api.vivifyideas.com\/media\/newsletter_image\/bg_image.jpg",
+                "gallery_id":1009,
+                "created_at":"2020-08-03 16:15:46",
+                "updated_at":"2020-08-03 16:15:46"
+             }
+          ]
+       },
+       {
+          "id":543,
+          "title":"Galerija No name ++",
+          "description":"Description of No name ++ gallery",
+          "user_id":4,
+          "created_at":"2020-08-02 11:59:43",
+          "updated_at":"2020-08-02 11:59:43",
+          "user":{
+             "id":4,
+             "first_name":"Jelena",
+             "last_name":"Krstic",
+             "email":"jelllenakrstic@gmail.com",
+             "terms_and_conditions":1,
+             "created_at":"2020-07-30 10:34:30",
+             "updated_at":"2020-07-30 10:34:30"
+          },
+          "images":[
+             {
+                "id":691,
+                "image_url":"https:\/\/jamiewright.dev\/wp-content\/uploads\/2019\/02\/test.jpg",
+                "gallery_id":543,
+                "created_at":"2020-08-02 11:59:43",
+                "updated_at":"2020-08-02 11:59:43"
+             }
+          ]
+       },
+       {
+          "id":542,
+          "title":"Galerija No name10",
+          "description":"Description of No name gallery",
+          "user_id":4,
+          "created_at":"2020-08-02 11:59:09",
+          "updated_at":"2020-08-02 11:59:09",
+          "user":{
+             "id":4,
+             "first_name":"Jelena",
+             "last_name":"Krstic",
+             "email":"jelllenakrstic@gmail.com",
+             "terms_and_conditions":1,
+             "created_at":"2020-07-30 10:34:30",
+             "updated_at":"2020-07-30 10:34:30"
+          },
+          "images":[
+             {
+                "id":690,
+                "image_url":"https:\/\/www.kualitee.com\/wp-content\/uploads\/2020\/07\/Importance-of-test-case-management-tools-for-startups.jpg",
+                "gallery_id":542,
+                "created_at":"2020-08-02 11:59:09",
+                "updated_at":"2020-08-02 11:59:09"
+             }
+          ]
+       },
+       {
+          "id":541,
+          "title":"Galerija No name9",
+          "description":"Description of No name gallery",
+          "user_id":4,
+          "created_at":"2020-08-02 11:58:32",
+          "updated_at":"2020-08-02 11:58:32",
+          "user":{
+             "id":4,
+             "first_name":"Jelena",
+             "last_name":"Krstic",
+             "email":"jelllenakrstic@gmail.com",
+             "terms_and_conditions":1,
+             "created_at":"2020-07-30 10:34:30",
+             "updated_at":"2020-07-30 10:34:30"
+          },
+          "images":[
+             {
+                "id":689,
+                "image_url":"https:\/\/www.kualitee.com\/wp-content\/uploads\/2020\/07\/Importance-of-test-case-management-tools-for-startups.jpg",
+                "gallery_id":541,
+                "created_at":"2020-08-02 11:58:32",
+                "updated_at":"2020-08-02 11:58:32"
+             }
+          ]
+       }
+    ],
+    "count":63
+ }

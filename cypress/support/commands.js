@@ -23,3 +23,27 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+
+
+Cypress.Commands.add('loginBe', (mejl, pasvord) =>{
+    Cypress.log({
+      name: 'loginByForm',
+      message: mejl + ' | ' + pasvord
+    })
+    cy.request({
+      method: 'POST',
+      url: Cypress.env('apiUrl') + '/auth/login',
+      form: true,
+      followRedirect: true,
+      body: {
+        email: mejl,
+        password: pasvord,
+      }
+    }).
+    then((resp)=>{
+       expect(resp.body).to.have.property('access_token')
+       localStorage.setItem('token', resp.body.access_token)
+       cy.visit('/')
+    }) 
+  })
