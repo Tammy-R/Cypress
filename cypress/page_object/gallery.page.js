@@ -34,7 +34,7 @@ export default class GalleryPage {
     }
 
     get addImageButton() {
-        return cy.get('[type=button]').contains('Add image')
+        return cy.get('button[type=button]').contains('Add image')
     }
 
     get trashButton() {
@@ -45,7 +45,7 @@ export default class GalleryPage {
         return cy.get('.input-buttons').eq(2)
     }
     get moveDown() {
-        return cy.get('.input-buttons').eq(5)
+        return cy.get('.input-buttons').eq(5) 
     }
 
     get alert() {
@@ -57,7 +57,11 @@ export default class GalleryPage {
     }
 
     get deleteButton(){
-        return cy.get('.btn').contains('Delete Gallery')
+        return cy.get('.btn-custom').eq(0).contains('Delete Gallery')
+    }
+
+    get editGallery(){
+        return cy.get('.btn-custom').eq(1).contains('Edit Gallery')
     }
 
 

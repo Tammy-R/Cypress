@@ -27,10 +27,10 @@
 
 
 Cypress.Commands.add('loginBe', (mejl, pasvord) =>{
-    Cypress.log({
-      name: 'loginByForm',
-      message: mejl + ' | ' + pasvord
-    })
+    // Cypress.log({
+    //   name: 'loginByForm',
+    //   message: mejl + ' | ' + pasvord
+    // })
     cy.request({
       method: 'POST',
       url: Cypress.env('apiUrl') + '/auth/login',
@@ -44,6 +44,21 @@ Cypress.Commands.add('loginBe', (mejl, pasvord) =>{
     then((resp)=>{
        expect(resp.body).to.have.property('access_token')
        localStorage.setItem('token', resp.body.access_token)
+       localStorage.setItem('user_id', resp.body.user_id)
        cy.visit('/')
     }) 
+  })
+
+
+
+  Cypress.Commands.add('deleteBe', (galerryId) => {
+      cy.request({
+      method: 'DELETE',
+      url: Cypress.env('apiUrl') + '/galleries/' + galerryId,
+      form: true,
+      followRedirect: true,
+      headers: {
+        authorization: `Bearer ${window.localStorage.getItem('token')}`
+    },
+    })
   })

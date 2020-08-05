@@ -25,7 +25,7 @@ describe('Route all', () => {
 
         cy.wait('@stubing')
         cy.get('@stubing').
-        its('response').then((resp)=>{
+        //its('response').then((resp)=>{
             // cy.log(resp.body.galleries[0].id)
             //brisanje galerije iz bekenda
             cy.request({

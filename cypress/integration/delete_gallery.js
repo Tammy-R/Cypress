@@ -30,17 +30,18 @@ describe('Brisanje galerija', () => {
         cy.get('@galerija').
             its('response').then((resp) => {
                 cy.log(resp)
-                for (var i = 0; i <= 10; i++) {  // i mora da bude <= od broja galerija koji su na stranici, inace puca test
+                for (var i = 0; i <= 0; i++) {  // i mora da bude <= od broja galerija koji su na stranici, inace puca test
                     let useCaseID = resp.body.galleries[i].id
-                    cy.request({
-                        method: 'DELETE',
-                        url: Cypress.env('apiUrl') + '/galleries/' + resp.body.galleries[i].id,
-                        form: true,
-                        followRedirect: true,
-                        headers: {
-                            authorization: `Bearer ${window.localStorage.getItem('token')}`
-                        },
-                    })
+                    // cy.request({
+                    //     method: 'DELETE',
+                    //     url: Cypress.env('apiUrl') + '/galleries/' + resp.body.galleries[i].id,
+                    //     form: true,
+                    //     followRedirect: true,
+                    //     headers: {
+                    //         authorization: `Bearer ${window.localStorage.getItem('token')}`
+                    //     },
+                    // })
+                    cy.deleteBe(useCaseID)
                 }
             }
             )
